@@ -1,52 +1,34 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class Nguoi{
-	protected:
-		string hoten, gioitinh;
-		int namsinh;
-};
-
-class SinhVien: virtual public Nguoi{
-	protected:
-		double diemtb;
-};
-
-class GiangVien: virtual public Nguoi{
-	protected:
-		string tenmon;
-};
-
-class TroGiang: public SinhVien, public GiangVien{
-	protected:
-		string tenkhoahoc;
+class so_nguyen{
+	private:
+		int n;
 	public:
-		void nhap(){
-			cout<<"Ho ten: "; getline(cin, hoten);
-			cout<<"Gioi tinh: "; getline(cin, gioitinh);
-			cout<<"Nam sinh: "; cin>>namsinh; cin.ignore();
-			cout<<"Ten mon: "; getline(cin, tenmon);
-			cout<<"Ten khoa hoc: "; getline(cin, tenkhoahoc);
+		so_nguyen(int n=0){
+			this->n=n;
 		}
-		void hien(){
-			cout<<"Ho ten: "<<hoten<<endl;
-			cout<<"Gioi tinh: "<<gioitinh<<endl;
-			cout<<"Nam sinh: "<<namsinh<<endl;
-			cout<<"Ten mon: "<<tenmon<<endl;
-			cout<<"Ten khoa hoc: "<<tenkhoahoc<<endl;
-			cout<<endl;
+		so_nguyen& operator = (const int& n){
+			if (this->n != n)
+				this->n;
+			return *this;
 		}
+		friend ostream& operator << (ostream& out, const so_nguyen& i);
+		friend istream& operator >> (istream& in, so_nguyen& i);
 };
+
+ostream& operator << (ostream& out, const so_nguyen& i){
+	out<<i.n;
+	return out;
+}
+
+istream& operator >> (istream& in, so_nguyen& i){
+	in>>i.n;
+	return in;
+}
 
 int main(){
-	TroGiang *a;
-	int n; cout<<"So luong: "; cin>>n; cin.ignore();
-	a = new TroGiang[n];
-	for(int i=0;i<n;i++)
-		a[i].nhap();
-	cout<<"-----Thong tin tro giang-----\n";
-	for(int i=0;i<n;i++)
-		a[i].hien();
-		
-	delete[] a;
+	so_nguyen n;
+	cin>>n;
+	cout<<"so nguyen: "<<n<<endl;
 }
